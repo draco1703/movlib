@@ -13,7 +13,7 @@ Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB){
 	_in3 = in3;
 	_in4 = in4;
 
-	Serial.write("wheels ready");
+	Serial.println("wheels ready");
 }
 
 /* needs testing */
