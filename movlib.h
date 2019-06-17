@@ -11,7 +11,7 @@
 class Mov
 {
 	public:
-		Mov(char in1, char in2, char in3, char in4, char enA, char enB, unsigned int serialPort);
+		Mov(char in1, char in2, char in3, char in4, char enA, char enB);
 		void advance(bool blocked, unsigned char speed);
 		void turnLeft(unsigned char speed);
 		void turnRight(unsigned char speed);

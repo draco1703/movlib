@@ -5,7 +5,7 @@
 #include "Arduino.h"
 #include "movlib.h"
 
-Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB, unsigned int serialPort){
+Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB){
 	pinMode(enA, OUTPUT);
 	pinMode(enB, OUTPUT);
 	_in1 = in1;
@@ -13,7 +13,6 @@ Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB, unsigned in
 	_in3 = in3;
 	_in4 = in4;
 
-	Serial.begin(serialPort);
 	Serial.write("wheels ready");
 }
 
