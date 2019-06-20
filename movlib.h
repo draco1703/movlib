@@ -1,8 +1,8 @@
 #include "Arduino.h"
 
 /*
-	usenslib - Library for interfacing with the HC-SR04 Ultrasonic Sensor.
-	Created by David M. Nielsen, May 15th, 2019 under the MIT license.
+	moblib - Library for interfacing with the DC motors.
+	Created by David M. Nielsen, June 17th, 2019 under the MIT license.
 */
 
 #ifndef mov_h
@@ -11,10 +11,11 @@
 class Mov
 {
 	public:
-		Mov(char in1, char in2, char in3, char in4, char enA, char enB);
+		Mov(char in1, char in2, char enA, char in3, char in4, char enB);
 		void advance(unsigned char speed);
 		void turnLeft(unsigned char speed);
 		void turnRight(unsigned char speed);
+		void stop();
 	private:
 		/* Figure out the correct pins */
 		void setSpeed(unsigned char speed);

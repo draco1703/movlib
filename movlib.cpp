@@ -1,11 +1,12 @@
-/*	usens - Library for interfacing with the HC-SR04 Ultrasonic Sensor.
-	Created by David M. Nielsen, May 15th, 2019 under the MIT license.
+/*
+	moblib - Library for interfacing with the DC motors.
+	Created by David M. Nielsen, June 17th, 2019 under the MIT license.
 */
 
 #include "Arduino.h"
 #include "movlib.h"
 
-Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB){
+Mov::Mov(char in1, char in2, char enA, char in3, char in4, char enB){
 	_enA = enA;
 	_enB = enB;
 	_in1 = in1;
@@ -13,13 +14,12 @@ Mov::Mov(char in1, char in2, char in3, char in4, char enA, char enB){
 	_in3 = in3;
 	_in4 = in4;
 
-
 	pinMode(_enA, OUTPUT);
 	pinMode(_enB, OUTPUT);
-	digitalWrite(_in1, LOW);
-	digitalWrite(_in2, LOW);
-	digitalWrite(_in3, LOW);
-	digitalWrite(_in4, LOW);
+	pinMode(_in1, LOW);
+	pinMode(_in3, LOW);
+	pinMode(_in2, LOW);
+	pinMode(_in4, LOW);
 
 	Serial.println("wheels ready");
 }
@@ -30,10 +30,17 @@ void Mov::advance(unsigned char speed){
 	/* move forwards until the road is blocked */
 	setSpeed(speed);
 	digitalWrite(_in1, HIGH);
-	digitalWrite(_in2, LOW);
 	digitalWrite(_in3, HIGH);
+	digitalWrite(_in2, LOW);
 	digitalWrite(_in4, LOW);
-	
+}
+
+void Mov::stop(){
+	digitalWrite(_in1, LOW);
+	digitalWrite(_in2, LOW);
+	digitalWrite(_in3, LOW);
+	digitalWrite(_in4, LOW);
+	setSpeed(0);
 }
 
 /* turn needs to be timed for accuracy */
@@ -43,6 +50,8 @@ void Mov::turnLeft(unsigned char speed){
 	setSpeed(speed);
 	digitalWrite(_in1, LOW);
 	digitalWrite(_in2, HIGH);
+	delay(500); /* delay however long it takes to turn 90 degrees */
+	stop();
 }
 
 void Mov::setSpeed(unsigned char speed){
@@ -52,4 +61,9 @@ void Mov::setSpeed(unsigned char speed){
 
 void Mov::turnRight(unsigned char speed){
 	/* flip right motor direction until the car is turned 90 degrees */
+	setSpeed(speed);
+	digitalWrite(_in3, LOW);
+	digitalWrite(_in4, HIGH);
+	delay(500); /* delay however long it takes to turn 90 degrees */
+	stop();
 }
