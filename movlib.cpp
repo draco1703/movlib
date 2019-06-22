@@ -48,9 +48,11 @@ void Mov::stop(){
 void Mov::turnLeft(unsigned char speed){
 	/* flip left motor direction until the car is turned 90 degrees */
 	setSpeed(speed);
-	digitalWrite(_in1, LOW);
-	digitalWrite(_in2, HIGH);
-	delay(500); /* delay however long it takes to turn 90 degrees */
+	digitalWrite(_in1, HIGH);
+	digitalWrite(_in3, LOW);
+	digitalWrite(_in2, LOW);
+	digitalWrite(_in4, HIGH);
+	delay(100); /* delay however long it takes to turn 90 degrees */
 	stop();
 }
 
@@ -62,8 +64,10 @@ void Mov::setSpeed(unsigned char speed){
 void Mov::turnRight(unsigned char speed){
 	/* flip right motor direction until the car is turned 90 degrees */
 	setSpeed(speed);
-	digitalWrite(_in3, LOW);
-	digitalWrite(_in4, HIGH);
-	delay(500); /* delay however long it takes to turn 90 degrees */
+	digitalWrite(_in1, LOW);
+	digitalWrite(_in3, HIGH);
+	digitalWrite(_in2, HIGH);
+	digitalWrite(_in4, LOW);
+	delay(100); /* delay however long it takes to turn 90 degrees */
 	stop();
 }
